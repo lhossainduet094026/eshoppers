@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List"%>
@@ -10,9 +11,7 @@
 <title>All products</title>
 </head>
 <body>
-	<%
-	List<ProductDTO> products = (List<ProductDTO>) request.getAttribute("products");
-	%>
+
 	<table>
 		<thead>
 			<tr>
@@ -21,18 +20,13 @@
 				<th>Price</th>
 			</tr>
 		</thead>
-		<%
-		for (ProductDTO product : products) {
-		%>
-		<tr>
-			<td><%=product.getName()%></td>
-			<td><%=product.getDescription()%></td>
-			<td><%=product.getPrice()%></td>
-		</tr>
-		<%
-		}
-		%>
-
+		<c:forEach var="product" items="${products}">
+			<tr>
+				<td><c:out value="${product.name}"></c:out></td>
+				<td><c:out value="${product.description}"></c:out></td>
+				<td><c:out value="${product.price}"></c:out></td>
+			</tr>
+		</c:forEach>
 	</table>
 
 </body>
