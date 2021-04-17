@@ -1,8 +1,11 @@
-package com.lokman.shoppingcart.web;
+package com.lokman.shoppingcart.service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.lokman.shoppingcart.dto.ProductDTO;
+import com.lokman.shoppingcart.repository.ProductRepository;
 
 public class ProductServiceImpl implements ProductService {
 

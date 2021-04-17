@@ -1,4 +1,4 @@
-package com.lokman.shoppingcart.web;
+package com.lokman.shoppingcart.dto;
 
 import java.math.BigDecimal;
 

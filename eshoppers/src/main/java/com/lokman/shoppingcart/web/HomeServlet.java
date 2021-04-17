@@ -9,9 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lokman.shoppingcart.dto.ProductDTO;
+import com.lokman.shoppingcart.repository.DummyProductRepositoryImpl;
+import com.lokman.shoppingcart.service.ProductService;
+import com.lokman.shoppingcart.service.ProductServiceImpl;
+
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
-	private ProductService productService;
+	private ProductService productService =new ProductServiceImpl(new DummyProductRepositoryImpl());
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
