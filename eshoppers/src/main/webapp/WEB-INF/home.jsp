@@ -9,25 +9,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>All products</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 </head>
 <body>
-
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Price</th>
-			</tr>
-		</thead>
-		<c:forEach var="product" items="${products}">
-			<tr>
-				<td><c:out value="${product.name}"></c:out></td>
-				<td><c:out value="${product.description}"></c:out></td>
-				<td><c:out value="${product.price}"></c:out></td>
-			</tr>
-		</c:forEach>
-	</table>
-
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<c:forEach var="product" items="${products}">
+				<tr>
+					<td><c:out value="${product.name}"></c:out></td>
+					<td><c:out value="${product.description}"></c:out></td>
+					<td><c:out value="${product.price}"></c:out></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>
