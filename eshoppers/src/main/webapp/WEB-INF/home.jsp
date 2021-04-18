@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 </head>
+
 <body style="padding-top: 70px">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
@@ -32,6 +33,9 @@
 	</div>
 	</nav>
 	<div class="container">
+		<div class="jumbotron">
+			<h1>Welcome to e-shoppers!</h1>
+		</div>
 		<table class="table">
 			<thead>
 				<tr>
@@ -49,5 +53,10 @@
 			</c:forEach>
 		</table>
 	</div>
+	<footer class="footer mt-auto py-3 fixed-bottom">
+	<div class="container">
+		<span class="text-muted"> Copyright &copy; eShoppers.com 2020 </span>
+	</div>
+	</footer>
 </body>
 </html>
