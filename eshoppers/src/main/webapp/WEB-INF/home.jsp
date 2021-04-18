@@ -35,28 +35,38 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Welcome to e-shoppers!</h1>
+			<img src="<c:url value="/image/cart.png"/>" style="height: 180px"
+				alt="" />
 		</div>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Description</th>
-					<th>Price</th>
-				</tr>
-			</thead>
+		<div class="row">
 			<c:forEach var="product" items="${products}">
-				<tr>
-					<td><c:out value="${product.name}"></c:out></td>
-					<td><c:out value="${product.description}"></c:out></td>
-					<td><c:out value="${product.price}"></c:out></td>
-				</tr>
+				<div class="col-sm-4">
+					<div class="card h-100 mb-4">
+						<div class="card-body">
+							<h5 class="card-title">
+								<c:out value="${product.name}"></c:out>
+							</h5>
+							<p class="card-text">
+								<c:out value="${product.description}"></c:out>
+							</p>
+							<p class="card-text">
+								price:$
+								<c:out value="${product.price}"></c:out>
+							</p>
+							<a href="#" class="card-link btn btn-outline-info">Add to
+								cart</a>
+						</div>
+					</div>
+				</div>
+
 			</c:forEach>
-		</table>
+		</div>
 	</div>
 	<footer class="footer mt-auto py-3 fixed-bottom">
 	<div class="container">
 		<span class="text-muted"> Copyright &copy; eShoppers.com 2020 </span>
 	</div>
 	</footer>
+
 </body>
 </html>
