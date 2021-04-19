@@ -18,4 +18,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'jstl:jstl:1.2'
     implementation 'org.webjars:bootstrap:4.4.1'
+    implementation 'cs.qos.logback:logback-classic:1.2.3'
    }
