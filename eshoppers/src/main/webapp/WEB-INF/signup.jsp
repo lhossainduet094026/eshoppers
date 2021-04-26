@@ -1,3 +1,4 @@
+
 <%@include file="includes/header.jsp"%>
 <%@include file="includes/navigation.jsp"%>
 
@@ -10,7 +11,8 @@
 		action="<c:url value="/signup"/>" method="post">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text"
-				class="form-control" id="username" name="username" placeholder="" />
+				class="form-control" id="username" name="username" placeholder=""
+				required="required" />
 
 		</div>
 		<div class="form-group">
