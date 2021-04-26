@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.LoggerFactory;
 
 import com.lokman.shoppingcart.dto.UserDTO;
+import com.lokman.shoppingcart.repository.UserRepositoryImpl;
 import com.lokman.shoppingcart.service.UserService;
+import com.lokman.shoppingcart.service.UserServiceImpl;
 
 import ch.qos.logback.classic.Logger;
 
@@ -19,7 +21,7 @@ import ch.qos.logback.classic.Logger;
  */
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet {
-	private UserService userService;
+	private UserService userService = new UserServiceImpl(new UserRepositoryImpl());
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(SignupServlet.class);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +38,7 @@ public class SignupServlet extends HttpServlet {
 		if (isValid(userDTO)) {
 			LOGGER.info("user is valid ,creating a new user with:{}", userDTO);
 			userService.saveUser(userDTO);
-			response.sendRedirect("/home");
+			response.sendRedirect("/eshoppers/home");
 		} else {
 			LOGGER.info("user sent invalid data:{}", userDTO);
 			request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
@@ -46,7 +48,7 @@ public class SignupServlet extends HttpServlet {
 
 	private boolean isValid(UserDTO userDTO) {
 		// will implement it later
-		return false;
+		return true;
 	}
 
 	private UserDTO copyParametersTo(HttpServletRequest request) {
