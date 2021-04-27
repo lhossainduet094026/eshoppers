@@ -30,7 +30,7 @@ public class SignupServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
 	}
 
-		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		UserDTO userDTO = copyParametersTo(request);
@@ -47,7 +47,14 @@ public class SignupServlet extends HttpServlet {
 	}
 
 	private boolean isValid(UserDTO userDTO) {
-		// will implement it later
+		if (userDTO.getUsername() == null || userDTO.getUsername().length() == 0 || userDTO.getUsername().length() < 4
+				|| userDTO.getUsername().length() > 32) {
+			return false;
+		} else if (userDTO.getEmail() == null || userDTO.getEmail().length() == 0 || userDTO.getEmail().length() < 4
+				|| userDTO.getEmail().length() > 32) {
+			return false;
+		}
+
 		return true;
 	}
 
