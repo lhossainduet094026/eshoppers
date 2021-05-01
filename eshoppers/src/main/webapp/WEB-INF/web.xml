@@ -14,14 +14,25 @@
 		<servlet-name>SignupServlet</servlet-name>
 		<servlet-class>com.lokman.shoppingcart.web.SignupServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>LoginServlet</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.lokman.shoppingcart.web.LoginServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>Server Time</servlet-name>
-		<url-pattern>/server-time</url-pattern>
+	<servlet-name>Server Time</servlet-name>
+	 <url-pattern>/server-time</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SignupServlet</servlet-name>
 		<url-pattern>/SignupServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
 
 	<error-page>
