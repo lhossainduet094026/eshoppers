@@ -1,6 +1,7 @@
 package com.lokman.shoppingcart.service;
 
 import com.lokman.shoppingcart.domain.User;
+import com.lokman.shoppingcart.dto.LoginDTO;
 import com.lokman.shoppingcart.dto.UserDTO;
 import com.lokman.shoppingcart.repository.UserRepository;
 
@@ -28,6 +29,12 @@ public class UserServiceImpl implements UserService {
 
 	private String encryptPassword(String password) {
 		// code will later
+		return null;
+	}
+
+	@Override
+	public User verifyUser(LoginDTO loginDTO) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -6,16 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.LoggerFactory;
 
+import com.lokman.shoppingcart.domain.User;
 import com.lokman.shoppingcart.dto.LoginDTO;
+import com.lokman.shoppingcart.service.UserService;
 
 import ch.qos.logback.classic.Logger;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+	private UserService userService;
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(LoginServlet.class);
 
 	public LoginServlet() {
@@ -39,19 +43,26 @@ public class LoginServlet extends HttpServlet {
 		LOGGER.info("Receiving login data{}", loginDTO);
 
 		try {
-			login(loginDTO);
+			login(loginDTO, request);
 			LOGGER.info("login successfully ,redirecting to homepage");
 			response.sendRedirect("/home");
-		}
-		catch(Exception e) {
-			LOGGER.error("incorrect username and password",e);
+		} catch (Exception e) {
+			LOGGER.error("incorrect username and password", e);
 			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
 	}
 
-	private void login(LoginDTO loginDTO)  {
-		//will implement later
-		
+	private void login(LoginDTO loginDTO, HttpServletRequest request) {
+
+		User user = userService.verifyUser(loginDTO);
+		HttpSession oldSession = request.getSession(false);
+		if (oldSession != null) {
+			oldSession.invalidate();
+		}
+
+		HttpSession session = request.getSession(true);
+		session.setAttribute("user", user);
+
 	}
 
 }
