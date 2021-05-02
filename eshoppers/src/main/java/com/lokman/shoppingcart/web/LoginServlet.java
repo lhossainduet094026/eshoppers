@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.LoggerFactory;
 
+import com.lokman.shoppingcart.dto.LoginDTO;
+
 import ch.qos.logback.classic.Logger;
 
 @WebServlet("/login")
@@ -32,8 +34,24 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		LoginDTO loginDTO = new LoginDTO(request.getParameter("username"), request.getParameter("password"));
+
+		LOGGER.info("Receiving login data{}", loginDTO);
+
+		try {
+			login(loginDTO);
+			LOGGER.info("login successfully ,redirecting to homepage");
+			response.sendRedirect("/home");
+		}
+		catch(Exception e) {
+			LOGGER.error("incorrect username and password",e);
+			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		}
+	}
+
+	private void login(LoginDTO loginDTO)  {
+		//will implement later
+		
 	}
 
 }
