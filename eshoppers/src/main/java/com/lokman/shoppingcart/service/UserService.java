@@ -7,6 +7,6 @@ import com.lokman.shoppingcart.dto.UserDTO;
 public interface UserService {
 	public void saveUser(UserDTO userDTO);
 
-	public User verifyUser(LoginDTO loginDTO);
+	User verifyUser(LoginDTO loginDTO);
 
 }
