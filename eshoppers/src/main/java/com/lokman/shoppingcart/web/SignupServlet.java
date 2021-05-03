@@ -38,7 +38,7 @@ public class SignupServlet extends HttpServlet {
 		if (isValid(userDTO)) {
 			LOGGER.info("user is valid ,creating a new user with:{}", userDTO);
 			userService.saveUser(userDTO);
-			response.sendRedirect("/eshoppers/home");
+			response.sendRedirect("/eshoppers/login");
 		} else {
 			LOGGER.info("user sent invalid data:{}", userDTO);
 			request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
