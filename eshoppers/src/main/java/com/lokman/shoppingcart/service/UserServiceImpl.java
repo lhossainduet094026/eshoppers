@@ -57,8 +57,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User verifyUser(LoginDTO loginDTO) {
-		// TODO Auto-generated method stub
+		User user = userRepository.findByName(loginDTO.getUsername());
+		if (user != null) {
+			var password = encryptPassword(loginDTO.getPassword());
+			if (user.getPassword().equals(password)) {
+				return user;
+			}
+		}
 		return null;
 	}
-
 }

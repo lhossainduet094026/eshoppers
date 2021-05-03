@@ -13,5 +13,10 @@ public class UserRepositoryImpl implements UserRepository {
 		USERS.add(user);
 
 	}
+	@Override
+	public User findByName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

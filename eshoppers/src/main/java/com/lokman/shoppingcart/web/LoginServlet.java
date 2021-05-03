@@ -12,14 +12,16 @@ import org.slf4j.LoggerFactory;
 
 import com.lokman.shoppingcart.domain.User;
 import com.lokman.shoppingcart.dto.LoginDTO;
+import com.lokman.shoppingcart.repository.UserRepositoryImpl;
 import com.lokman.shoppingcart.service.UserService;
+import com.lokman.shoppingcart.service.UserServiceImpl;
 
 import ch.qos.logback.classic.Logger;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-	private UserService userService;
+	private UserService userService = new UserServiceImpl(new UserRepositoryImpl());
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(LoginServlet.class);
 
 	public LoginServlet() {
