@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			login(loginDTO, request);
 			LOGGER.info("login successfully ,redirecting to homepage");
-			response.sendRedirect("/home");
+			response.sendRedirect("/eshoppers/home");
 		} catch (Exception e) {
 			LOGGER.error("incorrect username and password", e);
 			request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
