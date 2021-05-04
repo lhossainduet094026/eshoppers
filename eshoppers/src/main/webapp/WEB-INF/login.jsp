@@ -24,5 +24,9 @@
 			<button class="btn btn-primary btn-lg" type="submit">Login</button>
 		</div>
 	</form>
+
+	<span> Don't have a user account! <a class="btn-link"
+		href="<c:url value="/signup"/>">Signup</a>
+	</span>
 </div>
 <%@include file="includes/footer.jsp"%>

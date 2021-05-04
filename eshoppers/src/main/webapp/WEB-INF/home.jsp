@@ -32,7 +32,7 @@
 		<c:if test="${sessionScope.user!=null}">
 			<h1>
 				hello
-				<c:out value="${sessionScope.user.firstname}" />
+				<c:out value="${sessionScope.user.firstName}" />,
 				welcome to e-shoppers!
 			</h1>
 		</c:if>
