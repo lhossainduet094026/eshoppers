@@ -23,8 +23,8 @@
 	</servlet>
 
 	<servlet-mapping>
-	<servlet-name>Server Time</servlet-name>
-	 <url-pattern>/server-time</url-pattern>
+		<servlet-name>Server Time</servlet-name>
+		<url-pattern>/server-time</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SignupServlet</servlet-name>
@@ -44,5 +44,10 @@
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/WEB-INF/error.jsp</location>
 	</error-page>
-
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://lokman.com/functions</taglib-uri>
+			<taglib-location>/WEB-INF/tags/functions.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>
