@@ -15,6 +15,7 @@ import com.lokman.shoppingcart.dto.LoginDTO;
 import com.lokman.shoppingcart.repository.UserRepositoryImpl;
 import com.lokman.shoppingcart.service.UserService;
 import com.lokman.shoppingcart.service.UserServiceImpl;
+import com.lokman.shoppingcart.util.SecurityContext;
 
 import ch.qos.logback.classic.Logger;
 
@@ -57,14 +58,7 @@ public class LoginServlet extends HttpServlet {
 	private void login(LoginDTO loginDTO, HttpServletRequest request) {
 
 		User user = userService.verifyUser(loginDTO);
-		HttpSession oldSession = request.getSession(false);
-		if (oldSession != null) {
-			oldSession.invalidate();
-		}
-
-		HttpSession session = request.getSession(true);
-		session.setAttribute("user", user);
-
+		SecurityContext.login(request,user);
 	}
 
 }

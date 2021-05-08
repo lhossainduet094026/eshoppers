@@ -1,5 +1,6 @@
 <%@include file="includes/header.jsp"%>
 <%@include file="includes/navigation.jsp"%>
+<%@taglib prefix="sec" uri="http://lokman.com/functions" %>
 <div class="container">
 	<div class="jumbotron">
 		<h1>Welcome to e-shoppers!</h1>
@@ -29,10 +30,10 @@
 		</c:forEach>
 	</div>
 	<div class="jumbotron">
-		<c:if test="${sessionScope.user!=null}">
+		<c:if test="${sec:isAuthenticated(pageContext.request) }">
 			<h1>
 				hello
-				<c:out value="${sessionScope.user.firstName}" />,
+				<c:out value="${sec:getCurrentUser(pageContext.request).firstName}" />,
 				welcome to e-shoppers!
 			</h1>
 		</c:if>
