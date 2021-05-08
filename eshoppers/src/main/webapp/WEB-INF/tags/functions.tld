@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<taglib
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-    version="2.1">
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
 
-    <!-- Taglib config here -->
+	<tlib-version>1.0</tlib-version>
+	<short-name>In</short-name>
+	<uri>http://lokman.com/functions</uri>
+	<function>
+		<name>getCurrentUser</name>
+		<function-class>com.lokman.shoppingcart.util.SecurityContext
+		</function-class>
+		<function-signature>com.lokman.shoppingcart.domain.User
+			getCurrentUser(javax.servlet.http.HttpServletRequest)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>isAuthenticated</name>
+		<function-class>com.lokman.shoppingcart.util.SecurityContext
+		</function-class>
+		<function-signature>boolean
+			isAuthenticated(javax.servlet.http.HttpServletRequest)
+		</function-signature>
+	</function>
+
 </taglib>
