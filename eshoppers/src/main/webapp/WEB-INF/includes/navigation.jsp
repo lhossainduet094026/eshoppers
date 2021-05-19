@@ -15,8 +15,15 @@
 				<li class="nav-item"><a class="nav-link" href="#">About</a></li>
 				<c:choose>
 					<c:when test="${sec:isAuthenticated(pageContext.request)}">
-						<a class="nav-link" href="#">Logout
+						<a class="nav-link" href="#" onclick="logout()">Logout
 							[${sec:getCurrentUser(pageContext.request).firstName}] </a>
+						<script>
+							function logout() {
+								document.getElementById("logoutForm").submit();
+							}
+						</script>
+						<form style="visibility: hidden" id="logoutForm" method="post"
+							action="<c:url value="/logout"/>"></form>
 					</c:when>
 					<c:otherwise>
 						<a class="nav-link" href="<c:url value="/login"/>"> Log In </a>

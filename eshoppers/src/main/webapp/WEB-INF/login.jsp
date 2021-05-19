@@ -7,6 +7,11 @@
 	<form class="form-horizontal" role="form"
 		action="<c:url value="/login"/>" method="post">
 
+		<div class="row">
+			<c:if test="${message!=null}">
+				<div class="alert alert-success">${message}</div>
+			</c:if>
+		</div>
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text"
 				class="form-control" id="username" name="username" />
