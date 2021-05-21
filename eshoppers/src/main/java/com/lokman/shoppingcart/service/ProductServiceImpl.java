@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.lokman.shoppingcart.domain.Product;
 import com.lokman.shoppingcart.dto.ProductDTO;
 import com.lokman.shoppingcart.repository.ProductRepository;
 
@@ -17,8 +18,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDTO> findAllProductSortedByName() {
-		return productRepository.findAllProducts().stream().sorted(Comparator.comparing(ProductDTO::getName))
-				.collect(Collectors.toList());
+		return productRepository.findAllProducts().stream().map(this::convertToDTO)
+				.sorted(Comparator.comparing(ProductDTO::getName)).collect(Collectors.toList());
+	}
+
+	private ProductDTO convertToDTO(Product product) {
+		return new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice());
 	}
 
 }

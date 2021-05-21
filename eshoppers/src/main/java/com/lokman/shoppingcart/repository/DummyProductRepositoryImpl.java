@@ -3,14 +3,19 @@ package com.lokman.shoppingcart.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.lokman.shoppingcart.dto.ProductDTO;
+import com.lokman.shoppingcart.domain.Product;
 
 public class DummyProductRepositoryImpl implements ProductRepository {
 
+	private static final List<Product> ALL_PRODUCTS = List.of(
+			new Product(1L, "Apple ipad", "Apple ipad 10.2.32 GB", BigDecimal.valueOf(369.99)),
+			new Product(2L, "Headphone", "jabra elite bluetooth headphone", BigDecimal.valueOf(249.99)),
+			new Product(3L, "microsoft surface pro", "microsoft surface pro 128gb windows", BigDecimal.valueOf(799.99)),
+			new Product(4L, "amazon echo dot", "amazon echo dot 3rd generation with alexa", BigDecimal.valueOf(34.99)));
+
 	@Override
-	public List<ProductDTO> findAllProducts() {
-		return List.of(new ProductDTO("Apple ipad", "apple ipad 10.2 32gb", BigDecimal.valueOf(129.99)),
-				new ProductDTO("Headphone", "skull candy 10.2 32gb", BigDecimal.valueOf(300.99)));
+	public List<Product> findAllProducts() {
+		return ALL_PRODUCTS;
 	}
 
 }
