@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.LoggerFactory;
 
+import com.lokman.shoppingcart.domain.Cart;
+
 import ch.qos.logback.classic.Logger;
 
 /**
@@ -31,7 +33,7 @@ public class CartServlet extends HttpServlet {
 		LOGGER.info("Received request to add product with id:{} to cart", productId);
 		var cart = getCart(request);
 		addProductToCart(productId, cart);
-		response.sendRedirect("/home");
+		response.sendRedirect("/eshoppers/home");
 	}
 
 	private void addProductToCart(String productId, Object cart) {
@@ -39,9 +41,9 @@ public class CartServlet extends HttpServlet {
 
 	}
 
-	private Object getCart(HttpServletRequest request) {
+	private Cart getCart(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Cart();
 	}
 
 }
