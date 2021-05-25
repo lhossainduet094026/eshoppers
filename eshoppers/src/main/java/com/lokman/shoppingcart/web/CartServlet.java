@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.LoggerFactory;
 
 import com.lokman.shoppingcart.domain.Cart;
+import com.lokman.shoppingcart.domain.User;
+import com.lokman.shoppingcart.service.CartService;
+import com.lokman.shoppingcart.util.SecurityContext;
 
 import ch.qos.logback.classic.Logger;
 
@@ -18,7 +21,7 @@ import ch.qos.logback.classic.Logger;
  */
 @WebServlet("/add-to-cart")
 public class CartServlet extends HttpServlet {
-
+private CartService cartService;
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(CartServlet.class);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +45,8 @@ public class CartServlet extends HttpServlet {
 	}
 
 	private Cart getCart(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return new Cart();
+		final User currentUser = SecurityContext.getCurrentUser(request);
+		return cartService.getCartByUser(currentUser);
 	}
 
 }
