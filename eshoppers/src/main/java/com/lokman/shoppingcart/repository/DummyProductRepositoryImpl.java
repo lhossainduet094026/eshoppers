@@ -18,4 +18,10 @@ public class DummyProductRepositoryImpl implements ProductRepository {
 		return ALL_PRODUCTS;
 	}
 
+	@Override
+	public Product findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
