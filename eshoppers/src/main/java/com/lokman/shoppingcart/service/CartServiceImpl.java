@@ -2,6 +2,7 @@ package com.lokman.shoppingcart.service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.Set;
 
 import com.lokman.shoppingcart.domain.Cart;
 import com.lokman.shoppingcart.domain.CartItem;
@@ -49,13 +50,21 @@ public class CartServiceImpl implements CartService {
 	}
 
 	private BigDecimal calculateTotalPrice(Cart cart) {
-		// TODO Auto-generated method stub
-		return null;
+		BigDecimal totalPrice = null;
+		Set<CartItem> cartItems = cart.getCartItems();
+		for (CartItem cartItem : cartItems) {
+			totalPrice.add(cartItem.getPrice());
+		}
+		return totalPrice;
 	}
 
 	private Integer getTotalItem(Cart cart) {
-		// TODO Auto-generated method stub
-		return null;
+		int totalCartItem = 0;
+		Set<CartItem> cartItemsSet = cart.getCartItems();
+		for (CartItem cartItem : cartItemsSet) {
+			totalCartItem += cartItem.getQuantity();
+		}
+		return totalCartItem;
 	}
 
 	private Long parseProductId(String productId) {
@@ -79,7 +88,11 @@ public class CartServiceImpl implements CartService {
 	}
 
 	private void createNewCartItem(Product product) {
-
+		CartItem cartItem = new CartItem();
+		cartItem.setProduct(product);
+		cartItem.setQuantity(1);
+		cartItem.setPrice(product.getPrice());
+		return cartItemRepository.save(cartItem);
 	}
 
 	private CartItem increaseQuantityByOne(CartItem existingCartItem) {
