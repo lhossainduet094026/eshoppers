@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import com.lokman.shoppingcart.domain.Cart;
+import com.lokman.shoppingcart.domain.CartItem;
 import com.lokman.shoppingcart.domain.Product;
 import com.lokman.shoppingcart.domain.User;
 import com.lokman.shoppingcart.repository.CartRepository;
@@ -37,7 +38,7 @@ public class CartServiceImpl implements CartService {
 		Long id = parseProductId(productId);
 		var product = (Product) productRepository.findById(id);
 		if (product == null) {
-			//throw new ProductNotFoundException("Product not found by id:" + id);
+			// throw new ProductNotFoundException("Product not found by id:" + id);
 		}
 		addProductToCart(product, cart);
 		Integer totalTotalItem = getTotalItem(cart);
@@ -65,7 +66,30 @@ public class CartServiceImpl implements CartService {
 		}
 	}
 
-private void addProductToCart(Product product,Cart cart) {
-	
-}
+	private void addProductToCart(Product product, Cart cart) {
+		CartItem existingCartItem = findSimilarProductInCart(cart, product);
+
+		CartItem cartItem = null;
+		if (existingCartItem != null) {
+			cartItem = increaseQuantityByOne(existingCartItem);
+		} else {
+			createNewCartItem(product);
+		}
+		cart.getCartItems().add(cartItem);
+	}
+
+	private void createNewCartItem(Product product) {
+
+	}
+
+	private CartItem increaseQuantityByOne(CartItem existingCartItem) {
+		existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
+		BigDecimal totalPrice = (existingCartItem.getProduct().getPrice())
+				.multiply(BigDecimal.valueOf(existingCartItem.getQuantity()));
+
+		existingCartItem.setPrice(totalPrice);
+
+		return cartItemRepository.update(existingCartItem);
+	}
+
 }
