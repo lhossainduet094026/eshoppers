@@ -21,7 +21,7 @@ import ch.qos.logback.classic.Logger;
  */
 @WebServlet("/add-to-cart")
 public class CartServlet extends HttpServlet {
-private CartService cartService;
+	private CartService cartService;
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(CartServlet.class);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +40,6 @@ private CartService cartService;
 	}
 
 	private void addProductToCart(String productId, Object cart) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -8,15 +8,18 @@ import com.lokman.shoppingcart.domain.Cart;
 import com.lokman.shoppingcart.domain.CartItem;
 import com.lokman.shoppingcart.domain.Product;
 import com.lokman.shoppingcart.domain.User;
+import com.lokman.shoppingcart.repository.CartItemRepository;
 import com.lokman.shoppingcart.repository.CartRepository;
 import com.lokman.shoppingcart.repository.ProductRepository;
 
 public class CartServiceImpl implements CartService {
 	private final CartRepository cartRepository;
 	private final ProductRepository productRepository = null;
+	private CartItemRepository cartItemRepository;
 
-	public CartServiceImpl(CartRepository cartRepository) {
+	public CartServiceImpl(CartRepository cartRepository, CartItemRepository cartItemRepository) {
 		this.cartRepository = cartRepository;
+		this.cartItemRepository = cartItemRepository;
 	}
 
 	@Override
@@ -87,7 +90,18 @@ public class CartServiceImpl implements CartService {
 		cart.getCartItems().add(cartItem);
 	}
 
-	private void createNewCartItem(Product product) {
+	private CartItem findSimilarProductInCart(Cart cart, Product product) {
+		Set<CartItem> cartItems = cart.getCartItems();
+		for (CartItem cartItem : cartItems) {
+			Product existingProduct = cartItem.getProduct();
+			if (existingProduct.equals(product)) {
+				return cartItem;
+			}
+		}
+		return null;
+	}
+
+	private CartItem createNewCartItem(Product product) {
 		CartItem cartItem = new CartItem();
 		cartItem.setProduct(product);
 		cartItem.setQuantity(1);
