@@ -7,5 +7,5 @@ import com.lokman.shoppingcart.domain.Product;
 public interface ProductRepository {
 	public List<Product> findAllProducts();
 
-	public Product findById(Long id);
+	public Product findById(Long productId);
 }
