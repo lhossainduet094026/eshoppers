@@ -11,6 +11,7 @@ import com.lokman.shoppingcart.domain.User;
 import com.lokman.shoppingcart.repository.CartItemRepository;
 import com.lokman.shoppingcart.repository.CartRepository;
 import com.lokman.shoppingcart.repository.ProductRepository;
+import com.lokman.shoppingcart.util.ProductNotFoundException;
 
 public class CartServiceImpl implements CartService {
 	private final CartRepository cartRepository;
@@ -40,10 +41,8 @@ public class CartServiceImpl implements CartService {
 			throw new IllegalArgumentException("Product id cannot be null");
 		}
 		Long id = parseProductId(productId);
-		var product = (Product) productRepository.findById(id);
-		if (product == null) {
-			// throw new ProductNotFoundException("Product not found by id:" + id);
-		}
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new ProductNotFoundException("Product not found by id:" + id));
 		addProductToCart(product, cart);
 		Integer totalTotalItem = getTotalItem(cart);
 		BigDecimal totalPrice = calculateTotalPrice(cart);

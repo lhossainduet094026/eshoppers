@@ -2,6 +2,7 @@ package com.lokman.shoppingcart.repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import com.lokman.shoppingcart.domain.Product;
 
@@ -19,9 +20,8 @@ public class DummyProductRepositoryImpl implements ProductRepository {
 	}
 
 	@Override
-	public Product findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Product> findById(Long id) {
+		return findAllProducts().stream().filter(product -> product.getId().equals(id)).findFirst();
 	}
 
 }
