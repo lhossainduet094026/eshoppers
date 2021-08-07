@@ -36,20 +36,7 @@ public class CartServiceImpl implements CartService {
 		return cartRepository.save(cart);
 	}
 
-	public void addProductToCart(String productId, Cart cart) {
-		if (productId == null || productId.length() == 0) {
-			throw new IllegalArgumentException("Product id cannot be null");
-		}
-		Long id = parseProductId(productId);
-		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new ProductNotFoundException("Product not found by id:" + id));
-		addProductToCart(product, cart);
-		Integer totalTotalItem = getTotalItem(cart);
-		BigDecimal totalPrice = calculateTotalPrice(cart);
-		cart.setTotalItem(totalTotalItem);
-		cart.setTotalPrice(totalPrice);
-		cartRepository.update(cart);
-	}
+
 
 	private BigDecimal calculateTotalPrice(Cart cart) {
 		BigDecimal totalPrice = null;
@@ -116,6 +103,23 @@ public class CartServiceImpl implements CartService {
 		existingCartItem.setPrice(totalPrice);
 
 		return cartItemRepository.update(existingCartItem);
+	}
+
+	@Override
+	public void addProductToCart(String productId, Cart cart) {
+		if (productId == null || productId.length() == 0) {
+			throw new IllegalArgumentException("Product id cannot be null");
+		}
+		Long id = parseProductId(productId);
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new ProductNotFoundException("Product not found by id:" + id));
+		addProductToCart(product, cart);
+		Integer totalTotalItem = getTotalItem(cart);
+		BigDecimal totalPrice = calculateTotalPrice(cart);
+		cart.setTotalItem(totalTotalItem);
+		cart.setTotalPrice(totalPrice);
+		cartRepository.update(cart);
+		
 	}
 
 }
