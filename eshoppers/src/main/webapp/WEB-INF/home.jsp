@@ -7,6 +7,29 @@
 		<img src="<c:url value="/image/cart.png"/>" style="height: 180px"
 			alt="" />
 	</div>
+	<div class="col-6 mb-4">
+		<c:if test="${cart!=null && cart.cartItems.size()>0}">
+			<div class="card shadow-sm p-3 mb-5 bg-white">
+				<div class="card-header">
+					<h4>Your cart</h4>
+				</div>
+				<div class="card-body">
+					<p>
+						Total Item: <span class='badge badge-pill badge-success'> <c:out
+								value="${cart.totalItem}" />
+						</span>
+					</p>
+					<p>
+						Total price:$
+						<c:out value="${cart.totalPrice}" />
+					</p>
+					<p>
+						<a class="btn btn-outline-info" href="#">Checkout</a>
+					</p>
+				</div>
+			</div>
+		</c:if>
+	</div>
 	<div class="row">
 		<c:forEach var="product" items="${products}">
 			<div class="col-sm-4">
