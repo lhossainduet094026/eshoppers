@@ -15,12 +15,14 @@ import com.lokman.shoppingcart.util.ProductNotFoundException;
 
 public class CartServiceImpl implements CartService {
 	private final CartRepository cartRepository;
-	private final ProductRepository productRepository = null;
+	private final ProductRepository productRepository;
 	private CartItemRepository cartItemRepository;
 
-	public CartServiceImpl(CartRepository cartRepository, CartItemRepository cartItemRepository) {
+	public CartServiceImpl(CartRepository cartRepository, CartItemRepository cartItemRepository,
+			ProductRepository productRepository) {
 		this.cartRepository = cartRepository;
 		this.cartItemRepository = cartItemRepository;
+		this.productRepository = productRepository;
 	}
 
 	@Override
@@ -36,13 +38,12 @@ public class CartServiceImpl implements CartService {
 		return cartRepository.save(cart);
 	}
 
-
-
 	private BigDecimal calculateTotalPrice(Cart cart) {
-		BigDecimal totalPrice = null;
+		BigDecimal totalPrice = new BigDecimal(0);
 		Set<CartItem> cartItems = cart.getCartItems();
 		for (CartItem cartItem : cartItems) {
-			totalPrice.add(cartItem.getPrice());
+
+			totalPrice = totalPrice.add(cartItem.getPrice());
 		}
 		return totalPrice;
 	}
@@ -67,22 +68,25 @@ public class CartServiceImpl implements CartService {
 	private void addProductToCart(Product product, Cart cart) {
 		CartItem existingCartItem = findSimilarProductInCart(cart, product);
 
-		CartItem cartItem = null;
 		if (existingCartItem != null) {
-			cartItem = increaseQuantityByOne(existingCartItem);
+			existingCartItem = increaseQuantityByOne(existingCartItem);
 		} else {
-			createNewCartItem(product);
+			existingCartItem = null;
+			existingCartItem = createNewCartItem(product);
 		}
-		cart.getCartItems().add(cartItem);
+		cart.getCartItems().add(existingCartItem);
 	}
 
 	private CartItem findSimilarProductInCart(Cart cart, Product product) {
 		Set<CartItem> cartItems = cart.getCartItems();
 		for (CartItem cartItem : cartItems) {
-			Product existingProduct = cartItem.getProduct();
-			if (existingProduct.equals(product)) {
-				return cartItem;
+			if (cartItem != null) {
+				Product existingProduct = cartItem.getProduct();
+				if (existingProduct.equals(product)) {
+					return cartItem;
+				}
 			}
+
 		}
 		return null;
 	}

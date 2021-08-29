@@ -27,7 +27,7 @@ import ch.qos.logback.classic.Logger;
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
 	private ProductService productService = new ProductServiceImpl(new DummyProductRepositoryImpl());
-	private CartService cartService = new CartServiceImpl(new CartRepositoryImpl(), new CartItemRepositoryImpl());
+	private CartService cartService = new CartServiceImpl(new CartRepositoryImpl(), new CartItemRepositoryImpl(),new DummyProductRepositoryImpl());
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(HomeServlet.class);
 
 	@Override
