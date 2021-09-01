@@ -47,6 +47,11 @@
 		<servlet-name>CartServlet</servlet-name>
 		<servlet-class>com.lokman.shoppingcart.web.CartServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<display-name>CheckOutServlet</display-name>
+		<servlet-name>CheckOutServlet</servlet-name>
+		<servlet-class>com.lokman.shoppingcart.web.CheckOutServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Server Time</servlet-name>
@@ -67,6 +72,10 @@
 	<servlet-mapping>
 		<servlet-name>CartServlet</servlet-name>
 		<url-pattern>/CartServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckOutServlet</servlet-name>
+		<url-pattern>/CheckOutServlet</url-pattern>
 	</servlet-mapping>
 
 	<error-page>
