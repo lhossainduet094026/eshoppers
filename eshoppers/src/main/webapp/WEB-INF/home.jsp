@@ -24,7 +24,7 @@
 						<c:out value="${cart.totalPrice}" />
 					</p>
 					<p>
-						<a class="btn btn-outline-info" href="#">Checkout</a>
+						<a class="btn btn-outline-info" href="<c:url value="/checkout"/>">Checkout</a>
 					</p>
 				</div>
 			</div>

@@ -16,7 +16,7 @@ import com.lokman.shoppingcart.service.CartService;
 import com.lokman.shoppingcart.service.CartServiceImpl;
 import com.lokman.shoppingcart.util.SecurityContext;
 
-@WebServlet("/checkOutServlet")
+@WebServlet("/checkout")
 public class CheckOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

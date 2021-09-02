@@ -18,6 +18,7 @@ import com.lokman.shoppingcart.repository.DummyProductRepositoryImpl;
 import com.lokman.shoppingcart.service.CartService;
 import com.lokman.shoppingcart.service.CartServiceImpl;
 import com.lokman.shoppingcart.util.SecurityContext;
+import com.lokman.shoppingcart.util.StringUtil;
 
 import ch.qos.logback.classic.Logger;
 
@@ -40,10 +41,30 @@ public class CartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		var productId = request.getParameter("productId");
-		LOGGER.info("Received request to add product with id:{} to cart", productId);
+		var action = request.getParameter("action");
 		var cart = getCart(request);
+		if (StringUtil.isNotEmpty(action)) {
+			processCart(productId, action, cart);
+			response.sendRedirect("/checkout");
+			return;
+		}
+
+		LOGGER.info("Received request to add product with id:{} to cart", productId);
 		cartService.addProductToCart(productId, cart);
 		response.sendRedirect("/eshoppers/home");
+	}
+
+	private void processCart(String productId, String action, Cart cart) {
+		switch (Action.valueOf(action.toUpperCase())) {
+		case ADD:
+			LOGGER.info("Received request to add product with id:{} to cart", productId);
+			cartService.addProductToCart(productId, cart);
+			break;
+
+		case REMOVE:
+			LOGGER.info("Received request to remove product with id:{} to cart", productId);
+			cartService.removeProductToCart(productId, cart);
+		}
 	}
 
 	private Cart getCart(HttpServletRequest request) {
