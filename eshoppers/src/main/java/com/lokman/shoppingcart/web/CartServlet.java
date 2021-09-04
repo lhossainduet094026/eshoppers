@@ -69,6 +69,7 @@ public class CartServlet extends HttpServlet {
 
 	private Cart getCart(HttpServletRequest request) {
 		final User currentUser = SecurityContext.getCurrentUser(request);
+		System.out.println("user :"+currentUser.getFirstName());
 		return cartService.getCartByUser(currentUser);
 	}
 
