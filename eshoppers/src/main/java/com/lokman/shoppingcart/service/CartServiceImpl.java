@@ -11,6 +11,7 @@ import com.lokman.shoppingcart.domain.User;
 import com.lokman.shoppingcart.repository.CartItemRepository;
 import com.lokman.shoppingcart.repository.CartRepository;
 import com.lokman.shoppingcart.repository.ProductRepository;
+import com.lokman.shoppingcart.util.CartItemNotFoundException;
 import com.lokman.shoppingcart.util.ProductNotFoundException;
 
 public class CartServiceImpl implements CartService {
@@ -111,25 +112,58 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public void addProductToCart(String productId, Cart cart) {
-		if (productId == null || productId.length() == 0) {
+
+		Product product = findProduct(productId);
+		addProductToCart(product, cart);
+		updateCart(cart);
+	}
+
+	private void updateCart(Cart cart) {
+		Integer totalTotalItem = getTotalItem(cart);
+		BigDecimal totalPrice = calculateTotalPrice(cart);
+
+		cart.setTotalItem(totalTotalItem);
+		cart.setTotalPrice(totalPrice);
+
+		cartRepository.update(cart);
+
+	}
+
+	private Product findProduct(String productId) {
+		if (productId == null || productId.length() == 0)
+
+		{
 			throw new IllegalArgumentException("Product id cannot be null");
 		}
 		Long id = parseProductId(productId);
-		Product product = productRepository.findById(id)
+		return productRepository.findById(id)
 				.orElseThrow(() -> new ProductNotFoundException("Product not found by id:" + id));
-		addProductToCart(product, cart);
-		Integer totalTotalItem = getTotalItem(cart);
-		BigDecimal totalPrice = calculateTotalPrice(cart);
-		cart.setTotalItem(totalTotalItem);
-		cart.setTotalPrice(totalPrice);
-		cartRepository.update(cart);
-		
+
 	}
 
 	@Override
 	public void removeProductToCart(String productId, Cart cart) {
-		// TODO Auto-generated method stub
-		
+		Product product = findProduct(productId);
+		removeProductToCart(product, cart);
+		updateCart(cart);
+
+	}
+
+	private void removeProductToCart(Product productToRemove, Cart cart) {
+		var itemOptional = cart.getCartItems().stream()
+				.filter(cartItem -> cartItem.getProduct().equals(productToRemove)).findAny();
+		var cartItem = itemOptional
+				.orElseThrow(() -> new CartItemNotFoundException("cart not found by product:" + productToRemove));
+
+		if (cartItem.getQuantity() > 1) {
+			cartItem.setQuantity(cartItem.getQuantity() - 1);
+			cartItem.setPrice(cartItem.getPrice().subtract(productToRemove.getPrice()));
+			cart.getCartItems().add(cartItem);
+			cartItemRepository.update(cartItem);
+		} else {
+			cart.getCartItems().remove(cartItem);
+			cartItemRepository.remove(cartItem);
+		}
 	}
 
 }

@@ -15,9 +15,9 @@
 				</div>
 				<div class="card-body">
 					<p>
-						Total Item: <span class='badge badge-pill badge-success'> <c:out
-								value="${cart.totalItem}" />
-						</span>
+						Total Item:
+						<c:out value="${cart.totalItem}" />
+						
 					</p>
 					<p>
 						Total price:$

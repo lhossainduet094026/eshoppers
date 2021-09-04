@@ -45,7 +45,7 @@ public class CartServlet extends HttpServlet {
 		var cart = getCart(request);
 		if (StringUtil.isNotEmpty(action)) {
 			processCart(productId, action, cart);
-			response.sendRedirect("/checkout");
+			response.sendRedirect("/eshoppers/checkout");
 			return;
 		}
 
