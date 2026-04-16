@@ -1,8 +1,8 @@
-# 🛍️ eShoppers — Java E‑Commerce Web Application
+# 🛍️ eShoppers — JSP/Servlet-based E-Commerce Web Application
 
-A Java‑based **e‑commerce web application** built to simulate a real online shopping system with core features like product browsing, cart management, order placement, and user interaction.
+A Java-based e-commerce web application designed to simulate a real online shopping system with core features such as product browsing, cart management, and order placement.
 
-This project demonstrates **classic Java web development skills**, including **Servlets/JSP**, **JDBC database integration**, and basic **shopping cart logic**.
+This project demonstrates classic Java web development using Servlets and JSP, along with JDBC for database integration and implementation of basic shopping cart functionality.
 
 ---
 
