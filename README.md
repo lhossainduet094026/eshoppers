@@ -16,7 +16,7 @@ This project demonstrates **classic Java web development skills**, including **S
 - GitHub for source control  
 
 ---
-
+```
 ## 📁 Project Structure
 
 Here’s how the source is organized:
@@ -30,10 +30,7 @@ eshoppers/src/main/java/com/lokman/shoppingcart
 ├── assets/ → CSS, images, frontend resources
 └── WEB-INF/ → Config and deployment descriptors
 
-yaml
-Copy code
-
-This structure shows a **classic MVC pattern** used in traditional Java web apps.  
+```
 
 ---
 
